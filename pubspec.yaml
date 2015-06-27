@@ -9,3 +9,5 @@ dependencies:
   args: '>=0.10.0 <0.14.0'
   shelf: '>=0.6.0 <0.7.0'
   rpi_gpio: '0.2.0-alpha.1'
+  shelf_rest: '>=0.2.1'
+  mongo_dart: '>=0.1.47'

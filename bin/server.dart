@@ -6,8 +6,11 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
-import 'package:rpi_gpio/rpi_gpio.dart';
-import 'package:rpi_gpio/rpi_hardware.dart';
+import 'package:shelf_rest/shelf_rest.dart';
+//import 'package:rpi_gpio/rpi_gpio.dart';
+//import 'package:rpi_gpio/rpi_hardware.dart';
+
+import 'Persistence.dart';
 
 void main(List<String> args) {
   var parser = new ArgParser()
@@ -20,11 +23,12 @@ void main(List<String> args) {
     exit(1);
   });
 
-  var handler = const shelf.Pipeline()
-      .addMiddleware(shelf.logRequests())
-      .addHandler(_echoRequest);
+  Persistence p = new Persistence();
 
-  io.serve(handler, 'localhost', port).then((server) {
+  Router restAPI = router()
+    ..get("/api/token/revoke/{token}", (String token) => token);
+
+  io.serve(restAPI.handler, '0.0.0.0', port).then((server) {
     print('Serving at http://${server.address.host}:${server.port}');
   });
 }
