@@ -24,6 +24,7 @@ void main(List<String> args) {
   });
 
   Persistence p = new Persistence();
+  p.init();
 
   Router restAPI = router()
     ..get("/api/token/revoke/{token}", (String token) => token);
