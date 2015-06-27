@@ -6,6 +6,8 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
+import 'package:rpi_gpio/rpi_gpio.dart';
+import 'package:rpi_gpio/rpi_hardware.dart';
 
 void main(List<String> args) {
   var parser = new ArgParser()
