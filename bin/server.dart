@@ -33,8 +33,10 @@ void main(List<String> args) {
 
   Router restAPI = router()
     ..get("/api/token/revoke/{token}", (String token) => token)
-    ..get("/switch/on", () => switcher.sendUnit(0, true))
-    ..get("/switch/off", () => switcher.sendUnit(0, false));
+    ..get("/switch/unit/{unit}/on", (int unit) => switcher.sendUnit(unit, true))
+    ..get("/switch/unit/{unit}/off", (int unit) => switcher.sendUnit(unit, false))
+    ..get("/switch/group/on", () => switcher.sendGroup(true))
+    ..get("/switch/group/off", () => switcher.sendGroup(false));
 
   io.serve(restAPI.handler, '0.0.0.0', port).then((server) {
     print('Serving at http://${server.address.host}:${server.port}');
